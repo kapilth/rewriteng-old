@@ -31,7 +31,7 @@ func (h RewriteNG) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Ms
 	log.Errorf("plug-in calls RewriteNG")
 	state := request.Request{W: w, Req: r}
 	for _, rule := range h.Rules {
-		log.Errorf("rule evaluating %s", rule)
+		log.Errorf("rule evaluating %s", rule.Rule)
 		switch result := rule.Rewrite(ctx, state); result {
 		case RewriteDone:
 			if !validName(state.Req.Question[0].Name) {
